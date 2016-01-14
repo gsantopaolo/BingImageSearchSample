@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="PhotoAlbum.Views.MainPageTeam"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PhotoAlbum.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:PhotoAlbum.ViewModels"
+    xmlns:v="using:PhotoAlbum.Views"
+    xmlns:ts="using:PhotoAlbum.TemplateSelectors"
+    xmlns:controls="using:PhotoAlbum.Controls"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:MainPageTeamViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:ScatterView ItemsSource="{Binding PresentationItemCollection}">
+            <controls:ScatterView.ItemTemplateSelector>
+                <ts:ScatterViewDataTemplateSelector>
+                    <ts:ScatterViewDataTemplateSelector.ToolBarTemplate>
+                        <DataTemplate>
+                            <v:ToolBarView />
+                        </DataTemplate>
+                    </ts:ScatterViewDataTemplateSelector.ToolBarTemplate>
+                    <ts:ScatterViewDataTemplateSelector.TeamItemTemplate>
+                            <DataTemplate>
+                                <v:TeamItem />
+                            </DataTemplate>
+                        </ts:ScatterViewDataTemplateSelector.TeamItemTemplate>
+                    </ts:ScatterViewDataTemplateSelector>
+                </controls:ScatterView.ItemTemplateSelector>
+        </controls:ScatterView>
+    </Grid>
+</Page>
