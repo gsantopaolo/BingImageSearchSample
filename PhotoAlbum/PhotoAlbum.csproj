@@ -274,6 +274,9 @@
     <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
       <Name>BehaviorsXamlSDKManaged</Name>
     </SDKReference>
+    <SDKReference Include="InkToolbarControl, Version=0.3.2">
+      <Name>InkToolbar Control</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Template10\Template10 %28Library%29\Template10 %28Library%29.csproj">
