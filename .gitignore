@@ -196,4 +196,4 @@ FakesAssemblies/
 *.opt
 
 # API Keys
-*API_Keys.cs
+Commons/API_Keys.cs
