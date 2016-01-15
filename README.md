@@ -12,10 +12,10 @@ web through an in app search on Bing Images
 
  
 
-Aspect I want to cover: 
-------------------------
+Aspect I want to cover:
+-----------------------
 
-### Create the right user experience for each usage. 
+### Create the right user experience for each usage.
 
 For doing that we need to understand if the user is interacting with Window 10
 in three base ways:
@@ -79,3 +79,47 @@ This part is almost done:
 
 Anyone in the willing of collaborate on that can ping me and I’ll add as member
 on the git repo,
+
+ 
+
+ 
+
+API\_Keys.cs
+------------
+
+This file should contains API keys need for the applican to authenticate against
+services it is using.
+
+This is a personal file so it is added to .gitignore.
+
+You need to add your own API\_Keys.cs, and the class should like like this:
+
+ 
+
+*namespace PhotoAlbum*
+
+*{*
+
+*    public static class API\_Keys*
+
+*    {*
+
+*        public static class Bing\_Images\_Search*
+
+*        {*
+
+*            private const string USER\_ID = "Your MSFT ID"; *
+
+*            private const string SECURE\_ACCOUNT\_ID =
+"yourMarketplaceAccountKey not your Live passwor";*
+
+*        }*
+
+*    }*
+
+*}*
+
+ 
+
+To get your own API keys please follow the instruction
+[here](<http://www.bing.com/toolbox/bingsearchapi>)
