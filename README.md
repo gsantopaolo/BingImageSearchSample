@@ -54,28 +54,45 @@ This part is almost done:
     link](<https://msdn.microsoft.com/en-us/library/ff727729.aspx>) you will
     find the concept of the Scatterview for LSX
 
--   Bing Image search engine is done, need to be re-engineered
+### Bing Image search service 
 
--   Allow user to ink the right natural way (I’m going to implement the Ink
-    toolbar)
+Is done, need to be re-engineered
 
--   Enable any text field to be filled with voice and ink (to be done)
+### Allow user to ink con content like Edge
 
--   Enable Hello/Passport api so the user can access its own OneDrive folder (to
-    be done, I’ve already explored different ways and spent quite some time on
-    that)
+I was thinking to implement the InkToolbar
 
--   Show how to use the Windows.Devices.Perception to get stream from K4W and
-    Realsense with the same code (I’ve some code that need to be reengineered
-    and adapted to the scenario)
+### Enable any text field to be filled with voice and ink
 
--   Enable drag and drop on different use cases
+(to be done)
 
--   Part of the handled UI is missing
+### Enable Hello/Passport api 
 
--   Part of the Surface UI is missing
+So the user can access its own OneDrive folder (to be done, I’ve already
+explored different ways and spent quite some time on that)
 
--   Sharing the photo album (to be done)
+### Show how to use the Windows.Devices.Perception 
+
+To get stream from K4W and Realsense with the same code (I’ve some code that
+need to be reengineered and adapted to the scenario)
+
+### Enable drag and drop on different use cases
+
+TBD
+
+### Part of the handled UI is missing
+
+TBD
+
+### Part of the Surface UI is missing
+
+TBD
+
+### Sharing the photo album
+
+TBD
+
+ 
 
 Anyone in the willing of collaborate on that can ping me and I’ll add as member
 on the git repo,
@@ -96,26 +113,27 @@ You need to add your own API\_Keys.cs, and the class should like like this:
 
  
 
-*namespace PhotoAlbum*
+>   *namespace PhotoAlbum*
 
-*{*
+>   *{*
 
-*    public static class API\_Keys*
+    >   public static class API\_Keys
 
-*    {*
+    >   {
 
-*        public static class Bing\_Images\_Search*
+    >   public static class Bing\\\_Images\\\_Search
 
-*        {*
+    >   {
 
-*            private const string USER\_ID = "Your MSFT ID"; *
+    >   private const string USER\\\_ID = "Your MSFT ID";
 
-*            private const string SECURE\_ACCOUNT\_ID =
-"yourMarketplaceAccountKey not your Live passwor";*
+    >   private const string SECURE\\\_ACCOUNT\\\_ID =
 
-*        }*
+    >   "yourMarketplaceAccountKey not your Live passwor";
 
-*    }*
+    >   }
+
+>   }
 
 *}*
 
