@@ -451,7 +451,7 @@ namespace PhotoAlbum.Services.BingService
         //    }
 
         //    if (cts != null)
-        //    {
+        //    {e
         //        cts.Dispose();
         //        cts = null;
         //    }
