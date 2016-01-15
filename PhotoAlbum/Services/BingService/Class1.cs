@@ -458,8 +458,7 @@ namespace PhotoAlbum.Services.BingService
         //}
 
 
-        private const string USER_ID = "g_santopaolo@hotmail.com"; // yourLiveId
-        private const string SECURE_ACCOUNT_ID = "1b5R4r91DSdW+4vjmkJN3vJoBJ564V4y57em3YyDOEg=";  // yourMarketplaceAccountKey not your Live password
+        
         private const string SERVICE_URI = "https://api.datamarket.azure.com/Data.ashx/Bing/Search/Image?Query=%27{0}%27&Market=%27en-US%27&Adult=%27Strict%27&ImageFilters=%27Aspect%3aWide%27&$top=50&$format=Atom";
         //                                  https://api.datamarket.azure.com/Data.ashx/Bing/Search/Image?Query=%27valentino%20rossi%27&Market=%27en-US%27&Adult=%27Strict%27&ImageFilters=%27Aspect%3aWide%27&$top=50&$format=Atom
         //                                  https://api.datamarket.azure.com/Data.ashx/Bing/Search/Image?Query=%27valentino%2brossi%27&Market=%27en-US%27&Adult=%27Strict%27&ImageFilters=%27Aspect%3aWide%27&$top=50&$format=Atom"

@@ -97,10 +97,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API_Keys.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commons\API_Keys.cs" />
     <Compile Include="Controls\Class1.cs" />
     <Compile Include="Controls\ScatterView.cs" />
     <Compile Include="Events\Class1.cs" />
