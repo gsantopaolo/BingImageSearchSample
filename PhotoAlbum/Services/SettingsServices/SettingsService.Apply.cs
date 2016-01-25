@@ -22,6 +22,7 @@ namespace PhotoAlbum.Services.SettingsServices
         public void ApplyAppTheme(ApplicationTheme value)
         {
             Views.Shell.HamburgerMenu.RefreshStyles(value);
+            
         }
 
         private void ApplyCacheMaxDuration(TimeSpan value)

@@ -26,6 +26,14 @@ namespace PhotoAlbum.Views
         public MainPageTeam()
         {
             this.InitializeComponent();
+            var h = Shell.HamburgerMenu;
+            h.HamburgerButtonVisibility = Visibility.Collapsed;
+            h.DisplayMode = SplitViewDisplayMode.Overlay;
+            h.VisualStateNarrowMinWidth = -1;
+            h.VisualStateNormalMinWidth = -1;
+            h.VisualStateWideMinWidth = -1;
+            h.IsOpen = false;
+            
         }
 
         // strongly-typed view models enable x:bind

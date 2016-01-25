@@ -1,3 +1,4 @@
+using PhotoAlbum.Events;
 using PhotoAlbum.Services.BingService;
 
 using System;
@@ -46,16 +47,16 @@ namespace PhotoAlbum.ViewModels
             set
             {
                 Set(ref _bingImage, value);
-                if (_bingImage.MediaFilePath != null)
-                {
-                    IsLoading = true;
-                    Task.Run(async () =>
-                    {
-                        await LoadImage(_bingImage.MediaFilePath, Image);
+                //if (_bingImage.MediaFilePath != null)
+                //{
+                //    IsLoading = true;
+                //    Task.Run(async () =>
+                //    {
+                //        await LoadImage(_bingImage.MediaFilePath, Image);
 
-                        IsLoading = false;
-                    });
-                }
+                //        IsLoading = false;
+                //    });
+                //}
             }
         }
 
@@ -85,11 +86,27 @@ namespace PhotoAlbum.ViewModels
             }
         }
 
-        private BitmapImage _image = new BitmapImage();
-        public BitmapImage Image
+        //private BitmapImage _image = new BitmapImage();
+        //public BitmapImage Image
+        //{
+        //    get { return _image; }
+        //    set { Set(ref _image, value); }
+        //}
+
+        private DelegateCommand<TeamItemViewModel> _closeCommand;
+
+        public DelegateCommand<TeamItemViewModel> CloseCommand
         {
-            get { return _image; }
-            set { Set(ref _image, value); }
+            get
+            {
+                this._closeCommand = this._closeCommand ?? new DelegateCommand<TeamItemViewModel>((item) =>
+                {
+
+                        EventAggregator.Istance<CloseTeamItemEvent>().Publish(item);
+
+                }, null /*() => string.IsNullOrEmpty(Query) == false*/);
+                return this._closeCommand;
+            }
         }
     }
 }

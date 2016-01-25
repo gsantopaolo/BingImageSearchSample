@@ -4,7 +4,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Custom.xaml" />
-                <ResourceDictionary Source="Themes\Generic.xaml" />
+                <!--<ResourceDictionary Source="Themes\Generic.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

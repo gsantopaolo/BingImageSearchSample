@@ -11,13 +11,16 @@
     <AssemblyName>PhotoAlbum</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>PhotoAlbum_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -101,13 +104,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Class1.cs" />
-    <Compile Include="Controls\ScatterView.cs" />
+    <Compile Include="Controls\TabHeader.xaml.cs">
+      <DependentUpon>TabHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Events\Class1.cs" />
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BingService\Class1.cs" />
+    <Compile Include="Services\BingService\Class2.cs" />
     <Compile Include="Services\SettingsServices\ISettingsService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.Apply.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
@@ -216,12 +221,11 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Styles\Custom.xaml">
+    <Page Include="Controls\TabHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Themes\Generic.xaml">
+    <Page Include="Styles\Custom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -272,29 +276,17 @@
     <Folder Include="Strings\" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
-      <Name>BehaviorsXamlSDKManaged</Name>
-    </SDKReference>
     <SDKReference Include="InkToolbarControl, Version=0.3.2">
       <Name>InkToolbar Control</Name>
     </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Template10\Template10 %28Library%29\Template10 %28Library%29.csproj">
-      <Project>{ac3e4f10-6615-4e16-bb0f-104760c92b95}</Project>
-      <Name>Template10 %28Library%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Template10\Template10 %28Services%29\Template10 %28Services%29.csproj">
-      <Project>{8c139b94-9b85-4ce6-adcd-7e9365f45263}</Project>
-      <Name>Template10 %28Services%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Template10\Template10 %28Validation%29\Template10.Validation\Template10 %28Validation%29.csproj">
-      <Project>{f051bb74-a073-4d35-a185-b089579c52c4}</Project>
-      <Name>Template10 %28Validation%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WindowsStateTriggers\src\WindowsStateTriggers\WindowsStateTriggers.csproj">
-      <Project>{52d52f3c-4f64-4957-9fe8-780b7d7f75c3}</Project>
-      <Name>WindowsStateTriggers</Name>
+    <ProjectReference Include="..\..\TeamFamilyControls\TeamFamilyControls\TeamControls.csproj">
+      <Project>{4e08276f-2ecc-49fd-80b0-53516b5ec0a4}</Project>
+      <Name>TeamControls</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

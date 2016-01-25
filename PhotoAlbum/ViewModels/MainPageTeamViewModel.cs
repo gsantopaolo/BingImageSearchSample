@@ -12,22 +12,24 @@ namespace PhotoAlbum.ViewModels
 
     public class MainPageTeamViewModel : Mvvm.ViewModelBase
     {
-        SubscriptionToken _token = null;
-
+        SubscriptionToken _token1 = null;
+        SubscriptionToken _token2 = null;
         public MainPageTeamViewModel()
         {
             //if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             //    Value = "Design time value";
 
-            _token = EventAggregator.Istance<SearchEvent>().Subscribe((query) => Search(query));
+            _token1 = EventAggregator.Istance<SearchEvent>().Subscribe((query) => Search(query));
+            _token2 = EventAggregator.Istance<CloseTeamItemEvent>().Subscribe((item) => PresentationItemCollection.Remove(item));
             PresentationItemCollection.Add(new ToolBarViewModel());
         }
 
         private async void Search(string query)
         {
+            ObservableItemCollection<BingImage> images = await BingService.SearchImagesAsync(query, 10);
 
-            BingImageSearchService serv = new BingImageSearchService();
-            ObservableCollection<BingImage> images = await serv.SearchImagesAsync(query);
+            //BingImageSearchService serv = new BingImageSearchService();
+            //ObservableCollection<BingImage> images = await serv.SearchImagesAsync(query);
 
             foreach (BingImage image in images)
                 PresentationItemCollection.Add(new TeamItemViewModel() { BingImage = image });

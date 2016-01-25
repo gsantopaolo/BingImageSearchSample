@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using PhotoAlbum.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
-using WindowsStateTriggers;
+
 
 namespace PhotoAlbum
 {
@@ -12,19 +12,16 @@ namespace PhotoAlbum
 
     sealed partial class App : Template10.Common.BootStrapper
     {
-        ISettingsService _settings;
 
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
+
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
 
             #region App settings
 
-            _settings = SettingsService.Instance;
+            var _settings = SettingsService.Instance;
             RequestedTheme = _settings.AppTheme;
             CacheMaxDuration = _settings.CacheMaxDuration;
             ShowShellBackButton = _settings.UseShellBackButton;
@@ -32,17 +29,29 @@ namespace PhotoAlbum
             #endregion
         }
 
+        //// runs even if restored from state
+        //public override async Task OnInitializeAsync(IActivatedEventArgs args)
+        //{
+
+        //    // content may already be shell when resuming
+        //    if ((Window.Current.Content as Views.Shell) == null)
+        //    {
+        //        // setup hamburger shell
+        //        Template10.Services.NavigationService.NavigationService nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+        //        if (SettingsService.Instance.UserInteractionMode == false)
+        //            Window.Current.Content = new Views.Shell(nav);
+        //        else
+        //            Window.Current.Content = new Views.MainPageTeam();
+        //    }
+        //    await Task.Yield();
+        //}
+
         // runs even if restored from state
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
             // setup hamburger shell
-            //TODO: temporary changed to work with scatterview
             var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
-
-            if (_settings.UserInteractionMode == false)
-                Window.Current.Content = new Views.Shell(nav);
-            else
-                Window.Current.Content = new Views.MainPageTeam();
+            Window.Current.Content = new Views.Shell((Template10.Services.NavigationService.NavigationService)nav);
 
 
             await Task.Yield();
@@ -55,8 +64,10 @@ namespace PhotoAlbum
             await Task.Delay(0);
 
             // navigate to first page
-            if (_settings.UserInteractionMode == false)
+            if (SettingsService.Instance.UserInteractionMode == false)
                 NavigationService.Navigate(typeof(Views.MainPageHandleld));
+            else
+                NavigationService.Navigate(typeof(Views.MainPageTeam));
         }
     }
 }

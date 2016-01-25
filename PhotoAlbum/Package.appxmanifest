@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="5e807cab-dac3-4735-a909-fff80a003149" Publisher="CN=gian" Version="1.0.0.0" />
+  <Identity Name="5e807cab-dac3-4735-a909-fff80a003149" Publisher="CN=gian" Version="1.0.2.0" />
   <mp:PhoneIdentity PhoneProductId="5e807cab-dac3-4735-a909-fff80a003149" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>PhotoAlbum</DisplayName>

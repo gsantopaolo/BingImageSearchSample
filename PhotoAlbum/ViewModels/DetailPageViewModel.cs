@@ -21,7 +21,7 @@ namespace PhotoAlbum.ViewModels
         private BingImage _image;
         public BingImage Image { get { return _image; } set { Set(ref _image, value); } }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             if (state.ContainsKey(nameof(Image)))
             {
@@ -32,18 +32,17 @@ namespace PhotoAlbum.ViewModels
             {
                 Image = parameter as BingImage;
             }
+            return Task.CompletedTask;
         }
 
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
             if (suspending)
+            {
                 state[nameof(Image)] = Image;
-            await Task.Yield();
-        }
-
-        public override void OnNavigatingFrom(NavigatingEventArgs args)
-        {
-            args.Cancel = false;
+            }
+            return Task.CompletedTask;
         }
     }
 }

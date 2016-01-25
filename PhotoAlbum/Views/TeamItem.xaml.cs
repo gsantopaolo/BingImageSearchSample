@@ -23,12 +23,7 @@ namespace PhotoAlbum.Views
         public TeamItem()
         {
             this.InitializeComponent();
-            this.Loaded += TeamItem_Loaded;
-        }
-
-        private void TeamItem_Loaded(object sender, RoutedEventArgs e)
-        {
-            object o = this.DataContext;
+            
         }
 
         // strongly-typed view models enable x:bind

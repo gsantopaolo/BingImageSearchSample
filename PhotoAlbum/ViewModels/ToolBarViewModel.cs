@@ -6,16 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Template10.Services.NavigationService;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
 namespace PhotoAlbum.ViewModels
 {
     public class ToolBarViewModel : PhotoAlbum.Mvvm.ViewModelBase, IVewModel
     {
+        Services.SettingsServices.SettingsService _settings;
+
+
+        public bool UserInteractionMode
+        {
+            get { return _settings.UserInteractionMode; }
+            set { _settings.UserInteractionMode = value;  }
+        }
+
+
         public ToolBarViewModel()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 Query = "Designtime value";
+
+            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                _settings = Services.SettingsServices.SettingsService.Instance;
         }
 
         private string _query = "HoloLensDevs";

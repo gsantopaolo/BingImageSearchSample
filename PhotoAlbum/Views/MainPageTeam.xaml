@@ -8,15 +8,15 @@
     xmlns:vm="using:PhotoAlbum.ViewModels"
     xmlns:v="using:PhotoAlbum.Views"
     xmlns:ts="using:PhotoAlbum.TemplateSelectors"
-    xmlns:controls="using:PhotoAlbum.Controls"
+    xmlns:tc="using:TeamControls"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:MainPageTeamViewModel/>
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:ScatterView ItemsSource="{Binding PresentationItemCollection}">
-            <controls:ScatterView.ItemTemplateSelector>
+        <tc:ScatterView ItemsSource="{Binding PresentationItemCollection}" AllowItemsRotation="True">
+            <tc:ScatterView.ItemTemplateSelector>
                 <ts:ScatterViewDataTemplateSelector>
                     <ts:ScatterViewDataTemplateSelector.ToolBarTemplate>
                         <DataTemplate>
@@ -29,7 +29,7 @@
                             </DataTemplate>
                         </ts:ScatterViewDataTemplateSelector.TeamItemTemplate>
                     </ts:ScatterViewDataTemplateSelector>
-                </controls:ScatterView.ItemTemplateSelector>
-        </controls:ScatterView>
+                </tc:ScatterView.ItemTemplateSelector>
+        </tc:ScatterView>
     </Grid>
 </Page>

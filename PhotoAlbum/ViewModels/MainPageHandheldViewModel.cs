@@ -22,11 +22,18 @@ namespace PhotoAlbum.ViewModels
 
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             //if (state.ContainsKey(nameof(Value)))
+            //{
             //    Value = state[nameof(Value)]?.ToString();
-            state.Clear();
+            //    state.Clear();
+            //}
+            //else
+            //{
+            //    Value = parameter?.ToString();
+            //}
+            return Task.CompletedTask;
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -35,6 +42,7 @@ namespace PhotoAlbum.ViewModels
             //    state[nameof(Value)] = Value;
             await Task.Yield();
         }
+
         DelegateCommand<BingImage> _openCommand;
         public DelegateCommand<BingImage> OpenCommand
         {
@@ -65,17 +73,20 @@ namespace PhotoAlbum.ViewModels
 
         private async void Search(string query)
         {
-            IsLoading = true;
-            BingImageSearchService serv = new BingImageSearchService();
-            Images = await serv.SearchImagesAsync(query);
-            IsLoading = false;
 
-            foreach(BingImage image in Images)
-            {
-                image.IsLoading = true;
-                    await LoadImage(image.MediaFilePath, image.Image);
-                image.IsLoading = false;
-            }
+            //foreach(BingImage image in Images)
+            //{
+            //    image.IsLoading = true;
+            //        await LoadImage(image.MediaFilePath, image.Image);
+            //    image.IsLoading = false;
+            //}
+
+            Images.Clear();
+            IsLoading = true;
+            
+            Images = await BingService.SearchImagesAsync(query, 10);
+
+            IsLoading = false;
         }
 
         private string _query = "";
@@ -105,20 +116,23 @@ namespace PhotoAlbum.ViewModels
                     //Repositories.Refresh();
 
                     if (string.IsNullOrEmpty(Query) == false)
+                    {
+                        
                         Search(Query);
+                    }
 
                 }, null /*() => string.IsNullOrEmpty(Query) == false*/);
                 return this._queryCommand;
             }
         }
 
-        private ObservableCollection<BingImage> _images;
+        private ObservableItemCollection<BingImage> _images;
 
-        public ObservableCollection<BingImage> Images
+        public ObservableItemCollection<BingImage> Images
         {
             get
             {
-                return _images = this._images ?? new ObservableCollection<BingImage>();
+                return _images = this._images ?? new ObservableItemCollection<BingImage>();
             }
 
             set

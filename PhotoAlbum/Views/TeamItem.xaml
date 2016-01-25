@@ -6,21 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:vm="using:PhotoAlbum.ViewModels"
+    xmlns:it="using:Microsoft.Labs.InkToolbarControl"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=vm:TeamItemViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <!--<UserControl.DataContext>
         <vm:TeamItemViewModel/>
     </UserControl.DataContext>-->
     <Grid x:Name="layoutGrid" Width="300" Height="300" Background="Green">
-        <TextBlock Text="{Binding BingImage.Title}" Margin="10"/>
-        <Viewbox x:Name="MyImage" Width="{Binding ActualWidth, ElementName=layoutGrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=layoutGrid, Mode=OneWay}">
-            <Image Source="{Binding Image}" />
+        <InkCanvas x:Name="Inker" Canvas.ZIndex="100"></InkCanvas>
+        <it:InkToolbar TargetInkCanvas="{x:Bind Inker}" PenColor="#FFE61021" VerticalAlignment="Top" HorizontalAlignment="Right" Canvas.ZIndex="101"></it:InkToolbar>
+        <TextBlock Text="{Binding BingImage.Title}" Margin="10" />
+        <Viewbox x:Name="MyImage" Width="{Binding ActualWidth, ElementName=layoutGrid, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=layoutGrid, Mode=OneWay}"
+                 >
+            
+            <Image Source="{Binding BingImage.MediaUrl}" />
         </Viewbox>
         <ProgressRing x:Name="progressRing" Width="50"
                       Height="50" HorizontalAlignment="Center"
                       VerticalAlignment="Center" Foreground="{StaticResource ExtendedSplashForeground}"
                       IsActive="{Binding IsLoading}" >
         </ProgressRing>
+        <Button Content="close" Command="{Binding CloseCommand}" CommandParameter="{Binding}" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Button>
     </Grid>
 </UserControl>

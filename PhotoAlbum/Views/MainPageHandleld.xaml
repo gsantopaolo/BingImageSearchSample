@@ -9,6 +9,51 @@
       xmlns:local="using:PhotoAlbum.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:PhotoAlbum.ViewModels" mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="GridViewStyle1" TargetType="GridView">
+            <Setter Property="Padding" Value="0,0,0,10"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="TabNavigation" Value="Once"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition/>
+                        <ContentThemeTransition/>
+                        <ReorderThemeTransition />
+                        <EntranceThemeTransition  IsStaggeringEnabled="False"/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridView">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                <ItemsPresenter FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Footer="{TemplateBinding Footer}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Page.DataContext>
         <vm:MainPageHandheldViewModel />
@@ -93,7 +138,7 @@
                 <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="About" />
             </controls:PageHeader.SecondaryCommands>
             <controls:PageHeader.PrimaryCommands>
-                
+
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
@@ -137,16 +182,44 @@
                         </Button>
 
                     </StackPanel>
-                    <ListView Grid.Row="1" VerticalAlignment="Top" Padding="12,8,0,0" ItemTemplate="{StaticResource MyItemTemplate}" ItemsSource="{Binding Images}" SelectionMode="None" IsItemClickEnabled="True">
+                    <GridView Grid.Row="1" VerticalAlignment="Top" Padding="12,8,0,0"  ItemsSource="{Binding Images}" Style="{StaticResource GridViewStyle1}" >
+                        <!--<GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid>
+                                    <WrapGrid.ChildrenTransitions>
+                                        -->
+                        <!-- Apply a ReorderThemeTransition that will run when child elements are reordered. -->
+                        <!--
+                                        <TransitionCollection>
+                                            <ReorderThemeTransition />
+                                        </TransitionCollection>
+                                    </WrapGrid.ChildrenTransitions>
+                                </WrapGrid>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>-->
+
+                        <GridView.ItemTemplate>
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal" Width="460" Height="60" Margin="10,10,10,10" >
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Core:EventTriggerBehavior EventName="Tapped">
+                                            <Core:InvokeCommandAction Command="{Binding Path=OpenCommand}" CommandParameter="{Binding}" />
+                                        </Core:EventTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
+                                    <Image  Source="{Binding Thumbnail.MediaUrl}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Width="60" Height="60"/>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Title}" Height="60" Margin="10,15,5,5" FontSize="24" FontWeight="Light"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                    <!--<ListView Grid.Row="1" VerticalAlignment="Top" Padding="12,8,0,0" ItemTemplate="{StaticResource MyItemTemplate}" ItemsSource="{Binding Images}" SelectionMode="None" IsItemClickEnabled="True">
                         <Interactivity:Interaction.Behaviors>
                             <Core:EventTriggerBehavior EventName="ItemClick">
                                 <Core:InvokeCommandAction Command="{Binding OpenCommand}" />
                             </Core:EventTriggerBehavior>
                         </Interactivity:Interaction.Behaviors>
-
-                        <!--<ListView.Header>
-                <TextBlock Margin="8,0,0,0" Style="{StaticResource HeaderTextBlockStyle}" TextWrapping="NoWrap">Github Repositories</TextBlock>
-            </ListView.Header>-->
                         <ListView.ItemContainerTransitions>
                             <TransitionCollection>
                                 <AddDeleteThemeTransition />
@@ -158,13 +231,13 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             </Style>
                         </ListView.ItemContainerStyle>
-                    </ListView>
+                    </ListView>-->
                 </Grid>
             </controls:ModalDialog.Content>
 
         </controls:ModalDialog>
 
-        
+
     </Grid>
 </Page>
 

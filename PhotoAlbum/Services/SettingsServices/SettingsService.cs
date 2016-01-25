@@ -36,7 +36,7 @@ namespace PhotoAlbum.Services.SettingsServices
             set
             {
                 _helper.Write(nameof(UserInteractionMode), value);
-                ApplyUseShellBackButton(value);
+
             }
         }
 
